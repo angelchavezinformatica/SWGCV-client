@@ -8,6 +8,9 @@
       </p>
     </div>
   </header>
+  <footer class="Footer">
+    <p>&copy; 2024. Todos los derechos reservados.</p>
+  </footer>
 </template>
 
 <script setup lang="ts"></script>
@@ -35,4 +38,9 @@
     p
       color: $bg-color
       text-align: center
+.Footer
+  @include flex-center-center()
+  background-color: $bg-color-3
+  padding: .5rem
+  color: $bg-color
 </style>
