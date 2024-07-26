@@ -16,12 +16,24 @@
       </p>
     </div>
   </header>
+  <main class="Main">
+    <section>
+      <h2>Productos que Ofrecemos</h2>
+      <article class="Products">
+        <Product v-for="product in products" :product="product" />
+      </article>
+    </section>
+  </main>
   <footer class="Footer">
     <p>&copy; 2024. Todos los derechos reservados.</p>
   </footer>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useIndexPage } from "~/composables/index-page";
+
+const { products } = useIndexPage();
+</script>
 
 <style scope lang="sass">
 .Header
@@ -59,6 +71,23 @@
     a
       color: $bg-color
       font-size: .7rem
+.Main
+  @include flex--center()
+  width: 100%
+  margin: 2rem 0
+  section
+    @include flex--center()
+    flex-direction: column
+    gap: 2rem
+    width: 100%
+    h2
+      text-align: center
+      font-size: 1.8rem
+    .Products
+      @include flex-stretch-evenly()
+      flex-wrap: wrap
+      gap: 1rem
+      width: 100%
 .Footer
   @include flex-center-center()
   background-color: $bg-color-3
