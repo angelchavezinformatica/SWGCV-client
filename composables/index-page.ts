@@ -1,17 +1,12 @@
-import { AllInventory } from "~/config/api";
 import { type ProductI } from "~/interfaces/product";
-
-const getProducts = async (): Promise<ProductI[]> => {
-  const response = await fetch(AllInventory);
-  return (await response.json()).products as ProductI[];
-};
+import { useSomeProducts } from "~/stores/some-products";
 
 export const useIndexPage = () => {
-  const products: Ref<ProductI[]> = ref([]);
+  const { someProducts, request } = useSomeProducts();
 
   onMounted(async () => {
-    products.value = await getProducts();
+    await request();
   });
 
-  return { products };
+  return { products: someProducts };
 };

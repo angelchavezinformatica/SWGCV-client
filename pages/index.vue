@@ -19,8 +19,9 @@
   <main class="Main">
     <section>
       <h2>Productos que Ofrecemos</h2>
+      <NuxtLink to="/private">Explorar catálogo completo →</NuxtLink>
       <article class="Products">
-        <Product v-for="product in products" :product="product" />
+        <Product v-for="product in some.someProducts" :product="product" />
       </article>
     </section>
   </main>
@@ -30,9 +31,10 @@
 </template>
 
 <script setup lang="ts">
-import { useIndexPage } from "~/composables/index-page";
+import { useSomeProducts } from "~/stores/some-products";
+const some = useSomeProducts();
 
-const { products } = useIndexPage();
+callOnce(some.request);
 </script>
 
 <style scope lang="sass">
@@ -76,13 +78,19 @@ const { products } = useIndexPage();
   width: 100%
   margin: 2rem 0
   section
-    @include flex--center()
+    @include flex-center-center()
     flex-direction: column
     gap: 2rem
     width: 100%
     h2
       text-align: center
       font-size: 1.8rem
+    a
+      background-color: $bg-color-3
+      padding: .3rem .5rem
+      border-radius: 20px
+      color: $color-1
+      text-decoration: none
     .Products
       @include flex-stretch-evenly()
       flex-wrap: wrap
